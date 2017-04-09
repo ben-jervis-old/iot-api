@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
+	require 'base64'
 
   # GET /messages
   # GET /messages.json
@@ -24,7 +25,10 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
+    @message = Message.new(	eui: params[:hardware_serial],
+														payload: decode_msg(params[:payload_raw]),
+														lat: params[:latitude],
+														long: params[:longitude] )
 
     respond_to do |format|
       if @message.save
@@ -71,4 +75,8 @@ class MessagesController < ApplicationController
     def message_params
       params.require(:message).permit(:eui, :payload, :lat, :long)
     end
+
+		def decode_msg(str)
+			Base64.decode64(str)
+		end
 end
