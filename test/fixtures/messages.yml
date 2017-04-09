@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  eui: MyString
+  payload: MyString
+  lat: 1.5
+  long: 1.5
+
+two:
+  eui: MyString
+  payload: MyString
+  lat: 1.5
+  long: 1.5
